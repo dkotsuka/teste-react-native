@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-import Header from './Header'
 import CityListItem from './CityListItem'
 import { getInitialData } from '../utils/asyncStorage'
 import { actionLoadCities } from '../redux/actions/cities-actions'
