@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import Header from './Header'
@@ -16,20 +16,30 @@ class CityList extends React.Component {
 			this.props.dispatch(actionLoadCities(cities))
 		})
 	}
+
+	onItemPress = (id) => {
+		const {navigation} = this.props
+		navigation.navigate('LocationList', { id })
+
+	}
+
     render() {
     	const { cities } = this.props
-    	console.log(cities)
         return (
         	<View>
         		<Header title="CITIES"/>
-        		{cities ? 
-        			<FlatList 
-        				data={cities}
-        				keyExtractor={(city) => city.id}
-        				renderItem={(city) => <CityListItem city={city}/>}
-        			/>
-        			: <Text>Lista Vazia</Text>
-        		}
+        		{cities ?
+					cities.map((l, i) => (
+						<CityListItem
+							key={i}
+							id={l.id}
+							title={l.name}
+							subtitle={l.country}
+							onPress={() => this.onItemPress(l.id)}
+						/>
+					))
+					: <Text>Lista Vazia</Text>
+				}
 	    		
 	    	</View>
 	    )

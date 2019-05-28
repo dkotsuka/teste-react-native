@@ -20,13 +20,11 @@ class AddCity extends Component{
 
     handleNameChange = (e) => {
     	const name = e.nativeEvent.text
-    	console.log(name)
     	this.setState({ name })
     }
 
     handleCountryChange = (e) => {
     	const country = e.nativeEvent.text
-    	console.log(country)
     	this.setState({ country })
     }
 
@@ -43,7 +41,6 @@ class AddCity extends Component{
     }
 
   	render(){
-  		console.log("Rendering")
     	return <KeyboardAvoidingView style={styles.kav} behavior="padding">
 	    	<View style={styles.container}>
 	      		<Text style={styles.title}>CITIES</Text>

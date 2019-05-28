@@ -5,10 +5,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import CityList from './CityList'
 import AddCity from './AddCity'
+import StackNavigator from './StackNavigator'
 
 export default createAppContainer(createBottomTabNavigator(
 	{
-    List: CityList,
+    List: StackNavigator,
     Add: AddCity
 	},
   {
