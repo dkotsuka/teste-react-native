@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { Button } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import AddLocation from './AddLocation'
+import LocationItem from './LocationItem'
 import { primaryColor } from '../utils/colors'
 
 class LocationList extends Component {
@@ -34,14 +35,24 @@ class LocationList extends Component {
 		}
 	}
 	render(){
-		console.log('LocationList props', this.props)
+		const { locations } = this.props
+		console.log(locations)
 		return (
 			<View style={styles.container}>
 				<AddLocation
 					isVisible={this.state.modalVisible} 
 					toggleVisibility={this.toggleModalVisibility}
 					city={this.props.city}/>
-				<Text>LocationList</Text>
+				{
+					locations ?
+					<FlatList
+					  	data={ locations }
+					  	keyExtractor={(item) => item.id}
+					  	renderItem={({item}) => <LocationItem location={item}/>}
+					/>
+					: <Text>Nada para exibir...</Text>
+				}
+				
 				<Button 
 					icon={<MaterialIcons name={'add'} size={36} color='white' />}
 					containerStyle={styles.buttonContainer}
@@ -54,21 +65,22 @@ class LocationList extends Component {
 
 function mapStateToProps({locations}, {navigation}) {
 	const { id, name, country } = navigation.state.params
-	const state = { city: { id, name, country }, locations: null }
 	if (!locations) {
-		return state
+		return { city: { id, name, country }, locations: null }
 	}
 
 	const keys = Object.keys(locations)
 	const list = []
 
 	for (let i in keys) {
-		list.push(locations[keys[i]])
+		if(locations[keys[i]].cityId == id ){
+			list.push(locations[keys[i]])
+		}
 	}
 	if(list.length > 0) {
-		state = {city: { id, name, country }, locations: list}
+		return {city: { id, name, country }, locations: list}
 	}
-	return state
+	return { city: { id, name, country }, locations: null }
 	
 }
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import CityListItem from './CityListItem'
 import { getInitialData } from '../utils/asyncStorage'
 import { actionLoadCities } from '../redux/actions/cities-actions'
+import { actionLoadLocations } from '../redux/actions/location-actions'
 import { primaryColor } from '../utils/colors'
 
 class CityList extends React.Component {
@@ -16,8 +17,9 @@ class CityList extends React.Component {
         }
     }
     componentDidMount() {
-		getInitialData().then(({cities}) => {
+		getInitialData().then(({cities, locations}) => {
 			this.props.dispatch(actionLoadCities(cities))
+			this.props.dispatch(actionLoadLocations(locations))
 		})
 	}
 
