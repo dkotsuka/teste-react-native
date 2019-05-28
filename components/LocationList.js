@@ -19,18 +19,34 @@ class LocationList extends Component {
 	    }
 	}
 	state={ 
-		modalVisible: true,
+		modalVisible: false,
+	}
+
+	toggleModalVisibility = () => {
+		if(this.state.modalVisible){
+			this.setState({
+				modalVisible: false,
+			})
+		} else {
+			this.setState({
+				modalVisible: true,
+			})
+		}
 	}
 	render(){
 		console.log('LocationList props', this.props)
 		return (
 			<View style={styles.container}>
-				<AddLocation isVisible={this.state.modalVisible}/>
+				<AddLocation
+					isVisible={this.state.modalVisible} 
+					toggleVisibility={this.toggleModalVisibility}
+					city={this.props.city}/>
 				<Text>LocationList</Text>
 				<Button 
 					icon={<MaterialIcons name={'add'} size={36} color='white' />}
 					containerStyle={styles.buttonContainer}
-					buttonStyle={styles.button}/>
+					buttonStyle={styles.button}
+					onPress={this.toggleModalVisibility}/>
 			</View>
 		)
 	}

@@ -62,6 +62,7 @@ class AddLocation extends Component {
 			addLocation(location)
 			.then(() => dispatch(actionAddLocation(location)))
 		}
+		this.onClose()
 	}
 
 	onClose = () => {
@@ -83,7 +84,7 @@ class AddLocation extends Component {
 			        visible={this.props.isVisible}>
 					
 					<View style={styles.container}>
-						<Text style={styles.text}>New location in XXXX</Text>
+						<Text style={styles.text}>New location in {this.props.city.name}</Text>
 						<Input
 							placeholder='Location name'
 							inputStyle={styles.input}
