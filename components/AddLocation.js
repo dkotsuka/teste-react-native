@@ -96,7 +96,8 @@ class AddLocation extends Component {
 			name: "",
 			type: "",
 			address: "",
-			notes: ""
+			notes: "",
+			id: ""
 		})
 		this.props.toggleVisibility()
 	}
