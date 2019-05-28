@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { Input, Button } from 'react-native-elements';
+import { connect } from 'react-redux'
 import { Constants } from 'expo';
 
 import { primaryColor } from "../utils/colors"
 import { createId } from '../utils/helper'
+import { actionAddCity } from '../redux/actions/cities-actions'
+import { addCity } from '../utils/asyncStorage'
 
-export default class AddCity extends Component{
+class AddCity extends Component{
 	state = {
 		name: "",
 		country: ""
 	}
 	static navigationOptions = {
-        tabBarLabel: 'Cities'
+        tabBarLabel: 'Add'
     }
 
     handleNameChange = (e) => {
@@ -30,13 +33,13 @@ export default class AddCity extends Component{
     onSubmit = () => {
     	const id = 'city' + createId()
     	const {name, country} = this.state
-    	const city = {
-    		[id] : { id, name, country }
+    	const {dispatch} = this.props
+    	if(name.length > 0 && country.length > 0){
+    		const city = {
+	    		[id] : { id, name, country }
+	    	}
+	    	addCity(city).then(dispatch(actionAddCity(city)))
     	}
-
-
-    	console.log(city)
-
     }
 
   	render(){
@@ -70,6 +73,8 @@ export default class AddCity extends Component{
     	</KeyboardAvoidingView>
   	}
 }
+
+export default connect()(AddCity)
 
 const styles = StyleSheet.create({
 	kav:{

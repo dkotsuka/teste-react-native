@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 50,
     fontWeight: 'bold',
-    marginBottom: 10,
     backgroundColor: primaryColor,
   },
 })
