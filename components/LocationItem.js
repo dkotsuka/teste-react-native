@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements';
 
-import { primaryColor, 
-	primaryTextColor, 
-	secondaryLightColor, 
-	secondaryColor, 
-	secondaryDarkColor } from '../utils/colors'
+import { secondaryColor } from '../utils/colors'
 
 export default class LocationItem extends Component{
 	render(){

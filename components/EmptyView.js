@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-
-import { primaryColor, 
-	primaryTextColor, 
-	secondaryLightColor, 
-	secondaryColor, 
-	secondaryDarkColor } from '../utils/colors'
+import { secondaryColor } from '../utils/colors'
 
 function EmptyView() {
 	return (

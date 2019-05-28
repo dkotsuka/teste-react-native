@@ -7,14 +7,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import AddLocation from './AddLocation'
 import LocationItem from './LocationItem'
 import EmptyView from './EmptyView'
-import { primaryColor } from '../utils/colors'
+import { primaryColor, primaryTextColor } from '../utils/colors'
 
 class LocationList extends Component {
 	static navigationOptions = ({navigation}) => {
 		const {name} = navigation.state.params
 		return { 
 			title: name.toUpperCase(), 
-	        headerTintColor: 'white',
+	        headerTintColor: primaryTextColor,
 	        headerStyle: {
 	        	backgroundColor: primaryColor
 	        }

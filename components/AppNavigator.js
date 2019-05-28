@@ -2,10 +2,10 @@ import React from 'react'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import { createBottomTabNavigator, } from 'react-navigation-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import CityList from './CityList'
 import AddCity from './AddCity'
 import StackNavigator from './StackNavigator'
+import { primaryColor, secondaryColor } from '../utils/colors'
 
 export default createAppContainer(createBottomTabNavigator(
 	{
@@ -26,8 +26,8 @@ export default createAppContainer(createBottomTabNavigator(
         return <MaterialIcons name={iconName} size={25} color={tintColor} />;
       },
       tabBarOptions: {
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
+        activeTintColor: primaryColor,
+        inactiveTintColor: secondaryColor,
       },
     })
   }

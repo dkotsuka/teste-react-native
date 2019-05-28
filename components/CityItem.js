@@ -2,12 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
-
-import { primaryColor, 
-	primaryTextColor, 
-	secondaryLightColor, 
-	secondaryColor, 
-	secondaryDarkColor } from '../utils/colors'
+import { secondaryColor } from '../utils/colors'
 
 export default class CityItem extends Component{
 	render(){

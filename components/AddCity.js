@@ -4,10 +4,12 @@ import { Input, Button } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { Constants } from 'expo';
 
-import { primaryColor } from "../utils/colors"
 import { createId } from '../utils/helper'
 import { actionAddCity } from '../redux/actions/cities-actions'
 import { addCity } from '../utils/asyncStorage'
+import { primaryColor, 
+	primaryTextColor, 
+	secondaryDarkColor } from '../utils/colors'
 
 class AddCity extends Component{
 	state = {
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	inputContainer: {
-		backgroundColor: "white",
+		backgroundColor: primaryTextColor,
 		marginBottom: 10,
 	},
 	input:{
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
 	},
 	button:{
 		height:48,
-		backgroundColor: "gray",
+		backgroundColor: secondaryDarkColor,
 		borderRadius: 0,
 	}
 })

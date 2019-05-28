@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { ListItem } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
+import { secondaryColor } from '../utils/colors'
 
 export default function CityListItem(props) {
 	return <ListItem 
@@ -17,7 +18,7 @@ export default function CityListItem(props) {
 const styles = StyleSheet.create({
 	container: {
 		borderBottomWidth: 1,
-		borderColor: 'gray',
+		borderColor: secondaryColor,
 	},
 })
 

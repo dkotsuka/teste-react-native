@@ -10,7 +10,6 @@ import { actionAddLocation,
 	actionEditLocation,
 	actionRemoveLocation } from '../redux/actions/location-actions'
 import { primaryColor, 
-	primaryTextColor, 
 	secondaryLightColor, 
 	secondaryColor, 
 	secondaryDarkColor } from '../utils/colors'
@@ -124,6 +123,7 @@ class AddLocation extends Component {
 							{this.props.location ? "Edit location of " : "New location in "}
 							{this.props.city.name}
 						</Text>
+
 						<Input
 							placeholder='Location name'
 							inputStyle={styles.input}

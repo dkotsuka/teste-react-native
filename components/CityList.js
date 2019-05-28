@@ -7,12 +7,16 @@ import EmptyView from './EmptyView'
 import { getInitialData } from '../utils/asyncStorage'
 import { actionLoadCities } from '../redux/actions/cities-actions'
 import { actionLoadLocations } from '../redux/actions/location-actions'
-import { primaryColor } from '../utils/colors'
+import { primaryColor, 
+	primaryTextColor, 
+	secondaryLightColor, 
+	secondaryColor, 
+	secondaryDarkColor } from '../utils/colors'
 
 class CityList extends React.Component {
 	static navigationOptions = {
         title: 'CITIES',
-        headerTintColor: 'white',
+        headerTintColor: primaryTextColor,
         headerStyle: {
         	backgroundColor: primaryColor
         }
