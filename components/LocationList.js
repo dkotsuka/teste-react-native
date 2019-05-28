@@ -22,6 +22,7 @@ class LocationList extends Component {
 	}
 	state={ 
 		modalVisible: false,
+		location: null,
 	}
 
 	toggleModalVisibility = () => {
@@ -35,6 +36,20 @@ class LocationList extends Component {
 			})
 		}
 	}
+
+	onItemPress = (location) => {
+		this.setState({
+			location,
+			modalVisible: true,
+		})
+	}
+
+	clearLocation = () => {
+		this.setState({
+			location: null
+		})
+	}
+
 	render(){
 		const { locations } = this.props
 		console.log(locations)
@@ -43,13 +58,15 @@ class LocationList extends Component {
 				<AddLocation
 					isVisible={this.state.modalVisible} 
 					toggleVisibility={this.toggleModalVisibility}
-					city={this.props.city}/>
+					city={this.props.city}
+					location={this.state.location}
+					clearLocation={this.clearLocation}/>
 				{
 					locations ?
 					<FlatList
 					  	data={ locations }
 					  	keyExtractor={(item) => item.id}
-					  	renderItem={({item}) => <LocationItem location={item}/>}
+					  	renderItem={({item}) => <LocationItem location={item} onItemPress={this.onItemPress}/>}
 					/>
 					: <EmptyView/>
 				}

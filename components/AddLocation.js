@@ -5,8 +5,8 @@ import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { createId } from '../utils/helper'
-import { addLocation } from '../utils/asyncStorage'
-import { actionAddLocation } from '../redux/actions/location-actions'
+import { addLocation, editLocation } from '../utils/asyncStorage'
+import { actionAddLocation, actionEditLocation } from '../redux/actions/location-actions'
 import { primaryColor, 
 	primaryTextColor, 
 	secondaryLightColor, 
@@ -19,7 +19,23 @@ class AddLocation extends Component {
 		name: "",
 		type: "",
 		address: "",
-		notes: ""
+		notes: "",
+		id: ""
+	}
+
+	componentDidUpdate(){
+		if(this.props.location){
+			if(this.state.id != this.props.location.id){
+				this.populateState()
+			}
+		}		
+	}
+
+	populateState(){
+		const {name, type, address, notes, id} = this.props.location
+		this.setState({
+			name, type, address, notes, id
+		})
 	}
 
 	onChangeName = (event) => {
@@ -54,19 +70,27 @@ class AddLocation extends Component {
 		const {name, type, address, notes} = this.state
 		const cityId = this.props.city.id
 		const {dispatch} = this.props
-		const id = 'loc' + createId()
-		const location = {
-			[id]:{ id, cityId, name, type, address, notes }
-		}
+		let location
 
-		addLocation(location)
-		.then(() => this.onClose())
-		.catch((err) => alert(err))
-		dispatch(actionAddLocation(location))
-		
+		if(!this.props.location){
+			const id = 'loc' + createId()
+			location = {[id]:{ id, cityId, name, type, address, notes }}
+			addLocation(location)
+			.then(() => this.onClose())
+			.catch((err) => alert(err))
+			dispatch(actionAddLocation(location))
+		} else {
+			const {id} = this.state
+			location = {[id]:{ id, cityId, name, type, address, notes }}
+			editLocation(location)
+			.then(() => this.onClose())
+			.catch((err) => alert(err))
+			dispatch(actionEditLocation(location))
+		}
 	}
 
 	onClose = () => {
+		this.props.clearLocation()
 		this.setState({
 			name: "",
 			type: "",
@@ -114,7 +138,7 @@ class AddLocation extends Component {
 							onChange={this.onChangeNotes}/>
 
 						<Button 
-							title="Add Location"
+							title={this.props.location ? "Save changes" : "Add location"}
 							containerStyle={styles.submitContainer}
 							buttonStyle={[styles.button,{marginLeft: 10, marginRight: 10}]}
 							onPress={this.onSubmit}/>

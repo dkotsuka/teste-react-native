@@ -11,7 +11,7 @@ import { primaryColor,
 export default class LocationItem extends Component{
 	render(){
 		const {location} = this.props
-		return <TouchableOpacity>
+		return <TouchableOpacity onPress={() => this.props.onItemPress(location)}>
 			<Card
 				title={location.name}>
 				<View style={styles.lineContainer}>
