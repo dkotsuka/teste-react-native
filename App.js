@@ -1,21 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { Text, View, StyleSheet } from 'react-native';
+import { Constants } from 'expo';
+
+import reducer from './redux/reducers'
+import middleware from './redux/middleware'
+import CityList from './components/CityList'
+import AppNavigator from './components/AppNavigator'
 
 export default class App extends React.Component {
   render() {
+    const store = createStore(reducer, middleware)
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+      <Provider store={store}>
+        <AppNavigator />
+      </Provider>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
