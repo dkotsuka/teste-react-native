@@ -5,8 +5,10 @@ import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { createId } from '../utils/helper'
-import { addLocation, editLocation } from '../utils/asyncStorage'
-import { actionAddLocation, actionEditLocation } from '../redux/actions/location-actions'
+import { addLocation, editLocation, removeLocation } from '../utils/asyncStorage'
+import { actionAddLocation,
+	actionEditLocation,
+	actionRemoveLocation } from '../redux/actions/location-actions'
 import { primaryColor, 
 	primaryTextColor, 
 	secondaryLightColor, 
@@ -100,6 +102,15 @@ class AddLocation extends Component {
 		this.props.toggleVisibility()
 	}
 
+	onDelete = () => {
+		const {dispatch} = this.props
+		const {id} = this.state
+		removeLocation(id)
+		.then(this.onClose())
+		.catch(err => alert(err))
+		dispatch(actionRemoveLocation(id))
+	}
+
 	render() {
 		return (
 			<KeyboardAvoidingView>
@@ -109,7 +120,10 @@ class AddLocation extends Component {
 			        visible={this.props.isVisible}>
 					
 					<View style={styles.container}>
-						<Text style={styles.text}>New location in {this.props.city.name}</Text>
+						<Text style={styles.text}>
+							{this.props.location ? "Edit location of " : "New location in "}
+							{this.props.city.name}
+						</Text>
 						<Input
 							placeholder='Location name'
 							inputStyle={styles.input}
@@ -135,18 +149,29 @@ class AddLocation extends Component {
 							inputStyle={styles.input}
 							inputContainerStyle={styles.inputContainer}
 							value={this.state.notes}
+							multiline={true}
+							numberOfLines = {4}
 							onChange={this.onChangeNotes}/>
 
 						<Button 
 							title={this.props.location ? "Save changes" : "Add location"}
 							containerStyle={styles.submitContainer}
-							buttonStyle={[styles.button,{marginLeft: 10, marginRight: 10}]}
+							buttonStyle={[styles.button, styles.commonButton,
+									{marginLeft: 10, marginRight: 10}]}
 							onPress={this.onSubmit}/>
+						{this.props.location ?
+							<Button
+								title='Delete location'
+								containerStyle={styles.submitContainer}
+								buttonStyle={[styles.button, styles.deleteButton,
+									{marginLeft: 10, marginRight: 10}]}
+								onPress={this.onDelete}/>
+							: null }
 					</View>
 					<Button 
 						title="Close" 
 						containerStyle={styles.closeContainer}
-						buttonStyle={styles.button}
+						buttonStyle={[styles.button, styles.commonButton]}
 						onPress={this.onClose}/>
 				</Modal>
 			</KeyboardAvoidingView>
@@ -160,6 +185,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+		paddingBottom: 40,
 	},
 	text: {
 		fontSize: 20,
@@ -183,14 +209,18 @@ const styles = StyleSheet.create({
 		borderRadius: 0,
 	},
 	submitContainer:{
-		marginRight: 10,
-		marginLeft: 10,
 		width: "100%",
 	},
 	button: {
-		backgroundColor: secondaryDarkColor,
 		borderRadius: 0,
 		paddingRight: 20,
 		paddingLeft: 20,
+	},
+	commonButton: {
+		backgroundColor: secondaryDarkColor,
+	},
+	deleteButton: {
+		backgroundColor: primaryColor,
+		marginTop: 10,
 	}
 })
