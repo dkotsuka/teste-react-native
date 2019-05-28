@@ -17,9 +17,10 @@ class CityList extends React.Component {
 		})
 	}
 
-	onItemPress = (id) => {
+	onItemPress = (item) => {
 		const {navigation} = this.props
-		navigation.navigate('LocationList', { id })
+		const {id, name, country} = item
+		navigation.navigate('LocationList', { id, name, country })
 
 	}
 
@@ -35,7 +36,7 @@ class CityList extends React.Component {
 							id={l.id}
 							title={l.name}
 							subtitle={l.country}
-							onPress={() => this.onItemPress(l.id)}
+							onPress={() => this.onItemPress(l)}
 						/>
 					))
 					: <Text>Lista Vazia</Text>
