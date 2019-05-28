@@ -3,6 +3,7 @@ import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import CityListItem from './CityListItem'
+import EmptyView from './EmptyView'
 import { getInitialData } from '../utils/asyncStorage'
 import { actionLoadCities } from '../redux/actions/cities-actions'
 import { actionLoadLocations } from '../redux/actions/location-actions'
@@ -44,7 +45,7 @@ class CityList extends React.Component {
 							onPress={() => this.onItemPress(l)}
 						/>
 					))
-					: <Text>Lista Vazia</Text>
+					: <EmptyView/>
 				}
 	    		
 	    	</View>

@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import AddLocation from './AddLocation'
 import LocationItem from './LocationItem'
+import EmptyView from './EmptyView'
 import { primaryColor } from '../utils/colors'
 
 class LocationList extends Component {
@@ -50,7 +51,7 @@ class LocationList extends Component {
 					  	keyExtractor={(item) => item.id}
 					  	renderItem={({item}) => <LocationItem location={item}/>}
 					/>
-					: <Text>Nada para exibir...</Text>
+					: <EmptyView/>
 				}
 				
 				<Button 
