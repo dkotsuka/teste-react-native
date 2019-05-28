@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 
-import CityListItem from './CityListItem'
+import CityItem from './CityItem'
 import EmptyView from './EmptyView'
 import { getInitialData } from '../utils/asyncStorage'
 import { actionLoadCities } from '../redux/actions/cities-actions'
@@ -36,15 +36,11 @@ class CityList extends React.Component {
         return (
         	<View>
         		{cities ?
-					cities.map((l, i) => (
-						<CityListItem
-							key={i}
-							id={l.id}
-							title={l.name}
-							subtitle={l.country}
-							onPress={() => this.onItemPress(l)}
+					<FlatList 
+						data={ cities }
+					  	keyExtractor={(item) => item.id}
+					  	renderItem={({item}) => <CityItem city={item} onItemPress={this.onItemPress}/>}
 						/>
-					))
 					: <EmptyView/>
 				}
 	    		
