@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Button } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import AddLocation from './AddLocation'
 import { primaryColor } from '../utils/colors'
 
 class LocationList extends Component {
@@ -17,10 +18,14 @@ class LocationList extends Component {
 	        }
 	    }
 	}
+	state={ 
+		modalVisible: true,
+	}
 	render(){
 		console.log('LocationList props', this.props)
 		return (
 			<View style={styles.container}>
+				<AddLocation isVisible={this.state.modalVisible}/>
 				<Text>LocationList</Text>
 				<Button 
 					icon={<MaterialIcons name={'add'} size={36} color='white' />}
