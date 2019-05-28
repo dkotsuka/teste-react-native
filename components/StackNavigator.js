@@ -11,7 +11,7 @@ const StackNavigator = createStackNavigator(
 	},
 	{
 		initialRouteName: 'CityList',
-		headerMode : 'none',
+		headerMode : 'screen',
 	}
 )
 

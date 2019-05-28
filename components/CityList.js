@@ -6,10 +6,15 @@ import Header from './Header'
 import CityListItem from './CityListItem'
 import { getInitialData } from '../utils/asyncStorage'
 import { actionLoadCities } from '../redux/actions/cities-actions'
+import { primaryColor } from '../utils/colors'
 
 class CityList extends React.Component {
 	static navigationOptions = {
-        tabBarLabel: 'Cities'
+        title: 'CITIES',
+        headerTintColor: 'white',
+        headerStyle: {
+        	backgroundColor: primaryColor
+        }
     }
     componentDidMount() {
 		getInitialData().then(({cities}) => {
@@ -28,7 +33,6 @@ class CityList extends React.Component {
     	const { cities } = this.props
         return (
         	<View>
-        		<Header title="CITIES"/>
         		{cities ?
 					cities.map((l, i) => (
 						<CityListItem

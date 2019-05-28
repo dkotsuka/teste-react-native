@@ -2,10 +2,18 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
+import { primaryColor } from '../utils/colors'
+
 class LocationList extends Component {
 	static navigationOptions = ({navigation}) => {
 		const {name} = navigation.state.params
-		return { tabBarLabel: name }
+		return { 
+			title: name.toUpperCase(), 
+	        headerTintColor: 'white',
+	        headerStyle: {
+	        	backgroundColor: primaryColor
+	        }
+	    }
 	}
 	render(){
 		console.log('LocationList props', this.props)
