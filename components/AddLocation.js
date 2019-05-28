@@ -53,20 +53,16 @@ class AddLocation extends Component {
 	onSubmit = () => {
 		const {name, type, address, notes} = this.state
 		const cityId = this.props.city.id
-		const dispatch = this.props
+		const {dispatch} = this.props
 		const id = 'loc' + createId()
 		const location = {
 			[id]:{ id, cityId, name, type, address, notes }
 		}
 
-		console.log(location)
-
 		addLocation(location)
-		.then(() => {
-			dispatch(actionAddLocation(location))
-			this.onClose()
-
-		})
+		.then(() => this.onClose())
+		.catch((err) => alert(err))
+		dispatch(actionAddLocation(location))
 		
 	}
 

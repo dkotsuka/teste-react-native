@@ -36,7 +36,8 @@ class AddCity extends Component{
     		const city = {
 	    		[id] : { id, name, country }
 	    	}
-	    	addCity(city).then(dispatch(actionAddCity(city)))
+	    	addCity(city).then().catch(err => alert(err))
+	    	dispatch(actionAddCity(city))
     	}
     }
 
